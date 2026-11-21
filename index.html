@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Gold</title>
+<meta name="description" content="Nilai emas GMI, titik impas, dan saran harian.">
+<meta name="theme-color" content="#F4C430" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#231E0D" media="(prefers-color-scheme: dark)">
+<meta name="robots" content="noindex">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap">
+<link rel="stylesheet" href="app.css?v=1.0.0">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-mark" viewBox="0 0 32 32"><path d="M10.5 9h11l5 14h-21z" fill="currentColor"/><path d="M12.2 11.6h7.6" stroke="var(--mast,#F4C430)" stroke-width="1.6" stroke-linecap="round" fill="none"/></symbol>
+  <symbol id="i-up" viewBox="0 0 9 8"><path d="M4.5 0 9 8H0z"/></symbol>
+  <symbol id="i-down" viewBox="0 0 9 8"><path d="M0 0h9L4.5 8z"/></symbol>
+  <symbol id="i-flat" viewBox="0 0 9 8"><path d="M0 3h9v2H0z"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m11 6-6 6 6 6"/></symbol>
+  <symbol id="i-cam" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></symbol>
+  <symbol id="i-del" viewBox="0 0 24 24"><path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+</svg>
+
+<div class="snack" id="snack" role="status" aria-live="polite"></div>
+
+<!-- ============ KUNCI ============ -->
+<div id="gate" class="gate hide">
+  <svg class="mark" style="color:var(--ink)" aria-hidden="true"><use href="#i-mark"/></svg>
+  <h1>My Gold</h1>
+  <p>Buka lewat link pribadi, atau tempel kuncinya di sini.</p>
+  <input id="keyIn" type="password" autocomplete="off" placeholder="Kunci" aria-label="Kunci">
+  <button class="btn fill" id="keyGo">Masuk</button>
+</div>
+
+<!-- ============ BERANDA ============ -->
+<div id="home" class="hide">
+  <header class="mast">
+    <div class="wrap">
+      <div class="bar">
+        <svg class="mark" aria-hidden="true"><use href="#i-mark"/></svg>
+        <span class="name">My Gold</span>
+        <span class="stamp n" id="stamp"></span>
+        <button class="ib" id="reload" aria-label="Muat ulang"><svg class="i"><use href="#i-refresh"/></svg></button>
+      </div>
+      <div class="lbl" id="lbl">Nilai emas</div>
+      <div class="val n" id="val"><span class="sk" style="width:11ch;height:.75em"></span></div>
+      <div class="quote n" id="quote"><span><span class="sk"></span></span></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div id="stale"></div>
+    <section class="plate hide" id="advice" aria-label="Saran"></section>
+
+    <section class="sec" id="beSec">
+      <div class="sh"><h2>Titik impas</h2><span class="meta n" id="beMeta"></span></div>
+      <div id="be"></div>
+    </section>
+
+    <section class="sec">
+      <div class="sh"><h2>Buyback 1 g</h2><span class="meta n" id="cDate"></span></div>
+      <div class="px n"><span class="p" id="cPrice">–</span><span class="d" id="cChg"></span></div>
+      <div class="chart" id="chart"></div>
+      <div class="xl n" id="xl"></div>
+      <div class="seg" id="ranges" role="group" aria-label="Rentang grafik">
+        <button data-d="30" aria-pressed="false">1B</button><button data-d="90" aria-pressed="true">3B</button><button data-d="180" aria-pressed="false">6B</button><button data-d="365" aria-pressed="false">1T</button><button data-d="0" aria-pressed="false">Semua</button>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sh"><h2>Kepingan</h2><span class="meta n" id="hMeta"></span></div>
+      <table class="qt" id="holdings"></table>
+    </section>
+
+    <section class="sec hide" id="mkSec">
+      <div class="sh"><h2>Emas dunia</h2><span class="meta n" id="mkMeta"></span></div>
+      <div id="mk"></div>
+    </section>
+
+    <section class="sec">
+      <div class="sh"><h2>Harga buyback</h2><span class="meta n" id="pMeta"></span></div>
+      <table class="qt" id="prices"></table>
+    </section>
+
+    <div class="foot n"><span id="src">Google Sheet</span><span id="ver"></span></div>
+  </main>
+  <button class="fab" id="fab"><svg class="i"><use href="#i-cam"/></svg>Perbarui harga</button>
+</div>
+
+<!-- ============ PERBARUI HARGA ============ -->
+<div id="upd" class="hide">
+  <header class="top2"><div class="wrap bar">
+    <button class="ib" id="back" aria-label="Kembali"><svg class="i"><use href="#i-back"/></svg></button>
+    <h1>Perbarui harga</h1>
+  </div></header>
+  <main class="wrap">
+    <section class="sec" style="border-top:0;margin-top:12px">
+      <div class="sh"><h2>Screenshot GMI</h2><span class="meta">halaman Update Harga</span></div>
+      <div class="shots">
+        <span id="thumbs" style="display:contents"></span>
+        <label class="addt" for="file"><svg class="i"><use href="#i-plus"/></svg>Tambah</label>
+      </div>
+      <input type="file" id="file" accept="image/*" multiple class="hide">
+      <div class="hint" id="prog"></div>
+      <div id="fails"></div>
+      <div id="noKey" class="err hide">GEMINI_API_KEY belum diisi di Apps Script. Screenshot dibaca lewat OCR, atau pakai Isi manual.</div>
+    </section>
+    <div id="cards"></div>
+  </main>
+  <div class="savebar"><div class="wrap">
+    <button class="btn out" id="manual"><svg class="i"><use href="#i-edit"/></svg>Isi manual</button>
+    <button class="btn fill" id="save" disabled>Simpan</button>
+  </div></div>
+</div>
+
+<script src="app.js?v=1.0.0"></script>
+</body>
+</html>
