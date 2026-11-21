@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-21T00:00:00Z",
+  "title": "Design System: My Gold",
+  "extensions": {
+    "colorMeta": {
+      "masthead-yellow": { "role": "primary", "displayName": "Chrome Yellow", "canonical": "#F4C430", "dark": "#231E0D (masthead ground) / #F4C430 (masthead ink)", "tonalRamp": ["#2E2406", "#4B3C00", "#7A6208", "#A8870F", "#D4AB1E", "#F4C430", "#F8D873", "#FCEFC4"] },
+      "masthead-ink-secondary": { "role": "neutral", "displayName": "Masthead Umber", "canonical": "#4B3C00", "dark": "#C9B57A" },
+      "ink": { "role": "neutral", "displayName": "Press Ink", "canonical": "#151513", "dark": "#EDECE6", "tonalRamp": ["#151513", "#2A2926", "#43423E", "#575A5A", "#83888A", "#B9B7AE", "#DCDEDE", "#F5F6F6"] },
+      "ink-secondary": { "role": "neutral", "displayName": "Graphite", "canonical": "#575A5A", "dark": "#A6A49B" },
+      "ink-tertiary": { "role": "neutral", "displayName": "Pencil Grey", "canonical": "#83888A", "dark": "#8C8A81" },
+      "paper": { "role": "neutral", "displayName": "Cool Newsprint", "canonical": "#F5F6F6", "dark": "#121211" },
+      "rule": { "role": "neutral", "displayName": "Hairline", "canonical": "#DCDEDE", "dark": "#2A2926" },
+      "tint": { "role": "neutral", "displayName": "Wash", "canonical": "#ECEEEE", "dark": "#1C1B19" },
+      "plate-ink": { "role": "neutral", "displayName": "Plate Paper", "canonical": "#F7F7F4", "dark": "#121211" },
+      "plate-ink-secondary": { "role": "neutral", "displayName": "Plate Grey", "canonical": "#B9B7AE", "dark": "#56544D" },
+      "quote-green": { "role": "secondary", "displayName": "Quote Green", "canonical": "#0B7A3B", "dark": "#4FC27E", "tonalRamp": ["#05301A", "#0A5F2F", "#0B7A3B", "#1F9653", "#4FC27E", "#86D9A7", "#BDEBCF", "#E6F7EC"] },
+      "quote-red": { "role": "secondary", "displayName": "Quote Red", "canonical": "#C0261D", "dark": "#F0776C", "tonalRamp": ["#3D0C08", "#8F1A12", "#C0261D", "#DB4A40", "#F0776C", "#F5A39B", "#FACDC8", "#FDEDEB"] },
+      "quote-green-on-mast": { "role": "secondary", "displayName": "Quote Green (on yellow)", "canonical": "#0A5F2F", "dark": "#4FC27E" },
+      "quote-red-on-mast": { "role": "secondary", "displayName": "Quote Red (on yellow)", "canonical": "#8F1A12", "dark": "#F0776C" },
+      "flag-amber": { "role": "tertiary", "displayName": "Flag Amber", "canonical": "#A35A00", "dark": "#F0B357" },
+      "focus-blue": { "role": "tertiary", "displayName": "Focus Blue", "canonical": "#1F5FD1", "dark": "#7AA7FF" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Masthead portfolio value only." },
+      "signal": { "displayName": "Signal", "purpose": "Advice word on the reversed plate." },
+      "headline": { "displayName": "Headline", "purpose": "Secondary prices: 1 g buyback, world price pair." },
+      "title": { "displayName": "Title", "purpose": "App name, section and screen headings, plate headline." },
+      "body": { "displayName": "Body", "purpose": "Prose and table cells." },
+      "figure": { "displayName": "Figure", "purpose": "Quote line and table figures." },
+      "label": { "displayName": "Label", "purpose": "Date stamp, segments, small buttons, metadata." },
+      "caption": { "displayName": "Caption", "purpose": "Table headers, chart axis, footer, status tags." }
+    },
+    "shadows": [
+      { "name": "float", "value": "0 4px 14px rgba(0,0,0,.22), 0 1px 3px rgba(0,0,0,.2)", "purpose": "Fixed FAB only." },
+      { "name": "toast", "value": "0 6px 18px rgba(0,0,0,.25)", "purpose": "Snackbar only." }
+    ],
+    "motion": [
+      { "name": "ease-out-soft", "value": "cubic-bezier(.2,.8,.2,1)", "purpose": "Snackbar entry and disclosure chevron, 200ms." },
+      { "name": "press-scale", "value": "transform: scale(.97)", "purpose": "FAB pressed state." },
+      { "name": "spin", "value": "rotate 360deg linear, 700-800ms", "purpose": "Refresh and progress spinners." },
+      { "name": "reduced-motion", "value": "durations 0.01ms", "purpose": "All animation and transition collapsed under prefers-reduced-motion." }
+    ],
+    "breakpoints": [
+      { "name": "column", "value": "560px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ink pill for the main action of a screen (Simpan, Masuk).",
+      "html": "<button class=\"ds-btn-primary\">Simpan</button>",
+      "css": ".ds-btn-primary { height: 48px; padding: 0 18px; border-radius: 24px; border: 0; background: var(--ink, #151513); color: var(--paper, #F5F6F6); font-family: Archivo, system-ui, sans-serif; font-size: 15px; font-weight: 650; cursor: pointer; } .ds-btn-primary:focus-visible { outline: 2px solid var(--focus, #1F5FD1); outline-offset: 2px; } .ds-btn-primary:disabled { opacity: .35; cursor: default; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary pill beside the primary (Isi manual).",
+      "html": "<button class=\"ds-btn-out\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 20h4L19 9l-4-4L4 16z\"/><path d=\"m13.5 6.5 4 4\"/></svg>Isi manual</button>",
+      "css": ".ds-btn-out { height: 48px; padding: 0 18px; border-radius: 24px; border: 1.5px solid var(--ink, #151513); background: transparent; color: var(--ink, #151513); font-family: Archivo, system-ui, sans-serif; font-size: 15px; font-weight: 650; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; } .ds-btn-out:active { background: var(--tint, #ECEEEE); } .ds-btn-out:focus-visible { outline: 2px solid var(--focus, #1F5FD1); outline-offset: 2px; }"
+    },
+    {
+      "name": "Update FAB",
+      "kind": "button",
+      "refersTo": "button-fab",
+      "description": "Fixed ink pill, bottom-right of the 560px column, camera icon in yellow.",
+      "html": "<button class=\"ds-fab\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#F4C430\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 8h3l2-3h6l2 3h3v11H4z\"/><circle cx=\"12\" cy=\"13\" r=\"3.5\"/></svg>Perbarui harga</button>",
+      "css": ".ds-fab { height: 52px; padding: 0 20px 0 16px; border-radius: 26px; border: 0; background: var(--ink, #151513); color: var(--paper, #F5F6F6); display: inline-flex; align-items: center; gap: 10px; font-family: Archivo, system-ui, sans-serif; font-size: 15px; font-weight: 650; box-shadow: 0 4px 14px rgba(0,0,0,.22), 0 1px 3px rgba(0,0,0,.2); cursor: pointer; } .ds-fab:active { transform: scale(.97); } .ds-fab:focus-visible { outline: 2px solid var(--focus, #1F5FD1); outline-offset: 2px; }"
+    },
+    {
+      "name": "Segmented Range",
+      "kind": "chip",
+      "refersTo": "segmented-active",
+      "description": "Chart range selector; active cell inverts to ink.",
+      "html": "<div class=\"ds-seg\"><button>1B</button><button class=\"on\">3B</button><button>6B</button><button>1T</button><button>Semua</button></div>",
+      "css": ".ds-seg { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); border: 1px solid var(--rule, #DCDEDE); border-radius: 8px; overflow: hidden; width: 320px; } .ds-seg button { height: 36px; border: 0; background: transparent; font-family: Archivo, system-ui, sans-serif; font-size: 13px; font-weight: 600; font-variation-settings: 'wdth' 90; color: var(--ink2, #575A5A); cursor: pointer; } .ds-seg button + button { border-left: 1px solid var(--rule, #DCDEDE); } .ds-seg button.on { background: var(--ink, #151513); color: var(--paper, #F5F6F6); } .ds-seg button:focus-visible { outline: 2px solid var(--focus, #1F5FD1); outline-offset: -2px; }"
+    },
+    {
+      "name": "Masthead",
+      "kind": "nav",
+      "refersTo": "masthead",
+      "description": "Full-bleed yellow header with the headline quote.",
+      "html": "<header class=\"ds-mast\"><div class=\"bar\"><span class=\"name\">My Gold</span><span class=\"stamp\">21 Nov</span></div><div class=\"lbl\">Nilai emas · 38 g</div><div class=\"val\">Rp 71.240.000</div><div class=\"q\"><span class=\"up\">&#9650; Rp 4.210.000</span><span class=\"muted\">sejak 20 Nov</span></div></header>",
+      "css": ".ds-mast { background: #F4C430; color: #151513; padding: 0 16px 18px; font-family: Archivo, system-ui, sans-serif; font-variant-numeric: tabular-nums lining-nums; } .ds-mast .bar { display: flex; align-items: center; gap: 10px; height: 56px; } .ds-mast .name { font-size: 17px; font-weight: 700; flex: 1; } .ds-mast .stamp { font-size: 13px; font-weight: 600; font-variation-settings: 'wdth' 78; border-bottom: 1.5px solid currentColor; padding: 2px 0; } .ds-mast .lbl { font-size: 13px; font-weight: 500; color: #4B3C00; margin-top: 6px; } .ds-mast .val { font-size: 44px; line-height: 1.05; font-weight: 700; font-variation-settings: 'wdth' 74; letter-spacing: -.01em; margin-top: 2px; } .ds-mast .q { display: flex; gap: 16px; padding-top: 10px; font-size: 15px; font-weight: 600; font-variation-settings: 'wdth' 88; } .ds-mast .up { color: #0A5F2F; } .ds-mast .muted { color: #4B3C00; font-weight: 500; }"
+    },
+    {
+      "name": "Advice Plate",
+      "kind": "card",
+      "refersTo": "advice-plate",
+      "description": "The one reversed ink plate per screen, carrying the signal word.",
+      "html": "<section class=\"ds-plate\"><div class=\"top\"><span class=\"sig\">TAHAN</span><span class=\"when\">harga 21 Nov</span></div><div class=\"t\">Premium di atas biasanya</div><div class=\"x\">Tunggu premium turun sebelum menambah.</div></section>",
+      "css": ".ds-plate { background: var(--ink, #151513); color: #F7F7F4; padding: 16px 16px 14px; border-radius: 6px; font-family: Archivo, system-ui, sans-serif; font-size: 15px; line-height: 1.45; max-width: 380px; } .ds-plate .top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; } .ds-plate .sig { font-size: 30px; line-height: 1; font-weight: 800; font-variation-settings: 'wdth' 70; letter-spacing: .02em; color: #F4C430; } .ds-plate .when { font-size: 12px; color: #B9B7AE; } .ds-plate .t { font-size: 17px; font-weight: 700; margin-top: 10px; } .ds-plate .x { margin-top: 4px; opacity: .92; }"
+    },
+    {
+      "name": "Quote Table",
+      "kind": "custom",
+      "description": "Ruled tabular figures with a size column, price, and change with drawn triangles.",
+      "html": "<table class=\"ds-qt\"><tr><th>Ukuran</th><th class=\"r\">Buyback</th><th class=\"r\">Ubah</th></tr><tr class=\"own\"><td class=\"g\">5 g</td><td class=\"r\">Rp 9.385.000</td><td class=\"r up\"><svg width=\"9\" height=\"8\" viewBox=\"0 0 9 8\" fill=\"currentColor\"><path d=\"M4.5 0 9 8H0z\"/></svg> 0,8%</td></tr><tr><td class=\"g\">10 g</td><td class=\"r\">Rp 18.740.000</td><td class=\"r down\"><svg width=\"9\" height=\"8\" viewBox=\"0 0 9 8\" fill=\"currentColor\"><path d=\"M0 0h9L4.5 8z\"/></svg> 0,2%</td></tr></table>",
+      "css": ".ds-qt { width: 360px; border-collapse: collapse; font-family: Archivo, system-ui, sans-serif; font-size: 15px; font-variant-numeric: tabular-nums lining-nums; color: var(--ink, #151513); } .ds-qt th { text-align: left; font-size: 12px; font-weight: 600; color: var(--ink2, #575A5A); padding: 0 0 6px; border-bottom: 1px solid var(--ink, #151513); } .ds-qt td { padding: 11px 0; border-bottom: 1px solid var(--rule, #DCDEDE); font-variation-settings: 'wdth' 88; } .ds-qt tr:last-child td { border-bottom: 0; } .ds-qt .r { text-align: right; } .ds-qt .g { font-weight: 700; font-variation-settings: 'wdth' 78; } .ds-qt .up { color: #0B7A3B; } .ds-qt .down { color: #C0261D; } .ds-qt tr.own .g::after { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #F4C430; box-shadow: 0 0 0 1px #151513; margin-left: 6px; vertical-align: 2px; }"
+    },
+    {
+      "name": "Underline Date Input",
+      "kind": "input",
+      "description": "Date field on update cards: 1.5px ink underline, no box.",
+      "html": "<input class=\"ds-date\" type=\"date\" value=\"2026-11-21\">",
+      "css": ".ds-date { border: 0; border-bottom: 1.5px solid var(--ink, #151513); background: transparent; font-family: Archivo, system-ui, sans-serif; font-size: 17px; font-weight: 700; padding: 4px 0; color: var(--ink, #151513); border-radius: 0; } .ds-date:focus-visible { outline: 2px solid var(--focus, #1F5FD1); outline-offset: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Morning Quote Page",
+    "overview": "The app reads like the commodity page of an Indonesian business daily. A full-bleed chrome-yellow masthead carries the one headline quote. Below it, cool newsprint paper holds tight ruled quote tables. Every number is a figure in a column, set condensed and tabular, and each number appears once.\n\nHierarchy comes from weight, width, case and reversal, not from boxes or shadows. Sections open on a 2px ink rule. Rows are separated by 1px hairlines. Exactly one element per screen is reversed onto an ink plate: the advice. State is drawn as line form: solid rule means live, dashed rule means stale or pending.\n\nDensity is a single 560px phone column with a 16px gutter. Dark mode inverts to an ink ground; the masthead dims to deep ochre with yellow type, and the plate flips to light-on-dark ink.",
+    "keyCharacteristics": [
+      "One committed section hue: the whole masthead is yellow, never a small accent.",
+      "One family, Archivo variable; width does the work (condensed figures, normal prose).",
+      "Ruled tables, no cards, no card shadows.",
+      "One reversed plate per screen.",
+      "Up/down drawn as small filled SVG triangles in quote green and red."
+    ],
+    "rules": [
+      { "name": "The Full-Strength Masthead Rule", "body": "Yellow is a section hue at 100% across the masthead, not a sprinkled accent. Elsewhere it appears only as small markers (dots, cursor, icon).", "section": "colors" },
+      { "name": "The Market Colors Rule", "body": "Green and red mean price direction (red also means error). Never decorative.", "section": "colors" },
+      { "name": "The Width Before Weight Rule", "body": "Numbers get condensed width and tabular figures (`.n` + wdth 74–88). Prose stays at wdth 100.", "section": "typography" },
+      { "name": "The No-Card Rule", "body": "Content sits on paper between rules. No card containers, no card shadows.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do open every section with the 2px ink rule and a title/metadata heading row.",
+      "Do set every figure condensed with tabular lining numerals.",
+      "Do keep exactly one reversed ink plate per screen.",
+      "Do use dashed lines for stale or pending state and solid for live.",
+      "Do draw direction as filled 9×8px SVG triangles in quote green/red."
+    ],
+    "donts": [
+      "Don't wrap content in rounded cards or give non-floating elements shadows.",
+      "Don't use yellow as text or fill on paper beyond small markers; it belongs to the masthead.",
+      "Don't repeat a number in two places on the same screen.",
+      "Don't add a second typeface; vary Archivo width and weight instead."
+    ]
+  }
+}

@@ -77,7 +77,7 @@ main{ padding-bottom:calc(96px + env(safe-area-inset-bottom)); }
 /* Saran: satu-satunya pelat terbalik */
 .plate{ background:var(--plate); color:var(--plate-ink); margin-top:20px; padding:16px 16px 14px; border-radius:6px; }
 .plate .top{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
-.sigw{ font-size:30px; line-height:1; font-weight:800; font-variation-settings:"wdth" 70; letter-spacing:.02em; color:var(--sig); background:var(--plate-sig, transparent); }
+.sigw{ font-size:30px; line-height:1; font-weight:800; font-variation-settings:"wdth" 70; letter-spacing:.02em; color:var(--sig); }
 @media (prefers-color-scheme: dark){ .sigw{ color:var(--sig); background:#F4C430; padding:4px 6px 2px; border-radius:3px; } }
 .plate .when{ font-size:var(--fs-xs); color:var(--plate-ink2); }
 .plate .t{ font-size:var(--fs-m); font-weight:700; margin-top:10px; }
@@ -95,7 +95,7 @@ main{ padding-bottom:calc(96px + env(safe-area-inset-bottom)); }
 .rail{ position:relative; height:44px; margin:6px 7px 4px; }
 .rail .track{ position:absolute; left:0; right:0; top:20px; height:4px; background:var(--tint); border-radius:2px; }
 .rail .fill{ position:absolute; left:0; top:20px; height:4px; background:var(--ink); border-radius:2px; }
-.rail .gap{ position:absolute; top:20px; height:4px; height:0; top:21px; border-top:2px dashed var(--down); }
+.rail .gap{ position:absolute; height:0; top:21px; border-top:2px dashed var(--down); }
 .rail .tick{ position:absolute; top:10px; width:2px; height:24px; background:var(--ink); transform:translateX(-1px); }
 .rail .tick.goal{ top:7px; height:30px; }
 .rail .band{ position:absolute; top:18px; height:8px; background:var(--rule); border-radius:1px; }

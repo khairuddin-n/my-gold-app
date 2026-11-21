@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-21T11:58:26.910Z",
+        "reason": "model judgment: .seg is a segmented control whose buttons fill their bordered cells; text is centered with ample inset"
+      }
+    ]
+  }
+}
