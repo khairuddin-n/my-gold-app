@@ -1,5 +1,5 @@
 'use strict';
-const VERSION = '1.0.1';
+const VERSION = '1.0.2';
 const API = 'https://script.google.com/macros/s/AKfycbxNcZer2Morw-kTUR2dcMKzMpACanaEd67TE0cHp6AcnLXUJ78I0I-_FyyyRlDzl25-/exec';
 const LS = { key: 'mg_key', home: 'mg_home', range: 'mg_range' };
 
@@ -35,10 +35,18 @@ function snack(msg) {
 // ---------- API ----------
 let KEY = null;
 async function api(fn, ...args) {
+  return apiT(0, fn, ...args);
+}
+// ms = batas waktu (0 = tanpa batas)
+async function apiT(ms, fn, ...args) {
   let r;
+  const ctl = ms ? new AbortController() : null;
+  const timer = ms ? setTimeout(() => ctl.abort(), ms) : 0;
   try {
-    r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ k: KEY, fn, args }) });
-  } catch (e) { throw new Error(navigator.onLine ? 'Server tidak bisa dihubungi' : 'Sedang offline'); }
+    r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ k: KEY, fn, args }), signal: ctl ? ctl.signal : undefined });
+  } catch (e) {
+    throw new Error(e.name === 'AbortError' ? 'Server terlalu lama menjawab' : navigator.onLine ? 'Server tidak bisa dihubungi' : 'Sedang offline');
+  } finally { clearTimeout(timer); }
   const j = await r.json().catch(() => ({ ok: false, error: 'Respons server tidak terbaca' }));
   if (!j.ok) {
     if (/Kunci tidak valid/.test(j.error)) { store.del(LS.key); KEY = null; showGate(); }
@@ -298,13 +306,25 @@ function shrink(file) {
 async function readFiles(list) {
   const fails = [], results = [];
   try {
-    const BATCH = 4;
-    for (let i = 0; i < list.length; i += BATCH) {
-      $('prog').innerHTML = `<span class="spin"></span>Membaca ${Math.min(i + BATCH, list.length)} dari ${list.length} gambar…`;
-      const imgs = await Promise.all(list.slice(i, i + BATCH).map(shrink));
-      const out = await api('extractPrices', imgs.map(x => ({ mime: x.mime, data: x.data })));
-      out.forEach((r, k) => r.ok ? results.push(r) : fails.push({ name: imgs[k].name, error: r.error }));
-    }
+    // satu gambar per permintaan (maks 3 sekaligus): satu gagal tidak menggagalkan yang lain
+    let done = 0, next = 0;
+    const tick = () => { $('prog').innerHTML = `<span class="spin"></span>Membaca ${done} dari ${list.length} gambar…`; };
+    tick();
+    const one = async file => {
+      let img;
+      try { img = await shrink(file); } catch (e) { fails.push({ name: file.name, error: e.message }); return; }
+      const payload = [{ mime: img.mime, data: img.data }];
+      let r;
+      try { r = (await apiT(100000, 'extractPrices', payload))[0]; }
+      catch (e) {
+        if (/Kunci tidak valid/.test(e.message)) throw e;
+        try { r = (await apiT(100000, 'extractPrices', payload))[0]; }   // coba sekali lagi
+        catch (e2) { r = { ok: false, error: e2.message }; }
+      }
+      r.ok ? results.push(r) : fails.push({ name: file.name, error: r.error });
+    };
+    const worker = async () => { while (next < list.length) { await one(list[next++]); done++; tick(); } };
+    await Promise.all(Array.from({ length: Math.min(3, list.length) }, worker));
     mergeResults(results);
     const nOcr = results.filter(r => r.via === 'ocr').length;
     $('prog').innerHTML = !results.length ? '' :
