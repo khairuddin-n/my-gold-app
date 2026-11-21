@@ -1,5 +1,5 @@
 'use strict';
-const VERSION = '1.1.0';
+const VERSION = '1.1.1';
 const API = 'https://script.google.com/macros/s/AKfycbxNcZer2Morw-kTUR2dcMKzMpACanaEd67TE0cHp6AcnLXUJ78I0I-_FyyyRlDzl25-/exec';
 const LS = { key: 'mg_key', home: 'mg_home', range: 'mg_range' };
 

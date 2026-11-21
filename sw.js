@@ -1,8 +1,8 @@
 // My Gold service worker: halaman network-first (supaya rilis baru langsung terpakai),
 // aset stale-while-revalidate, font cache-first, API tidak pernah di-cache.
-const VERSION = '1.1.0';
+const VERSION = '1.1.1';
 const CACHE = 'mg-' + VERSION;
-const SHELL = ['./', 'index.html', 'app.css?v=1.1.0', 'app.js?v=1.1.0', 'manifest.webmanifest', 'icon.svg', 'icon-192.png'];
+const SHELL = ['./', 'index.html', 'app.css?v=1.1.1', 'app.js?v=1.1.1', 'manifest.webmanifest', 'icon.svg', 'icon-192.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));

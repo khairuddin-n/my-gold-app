@@ -2,7 +2,7 @@
 :root{
   --paper:#F5F6F6; --ink:#151513; --ink2:#575A5A; --ink3:#83888A; --rule:#DCDEDE; --tint:#ECEEEE; --flag:#A35A00;
   --mast:#F4C430; --mast-ink:#151513; --mast-ink2:#4B3C00; --mast-rule:rgba(21,21,19,.22);
-  --plate:#151513; --plate-ink:#F7F7F4; --plate-ink2:#B9B7AE; --sig:#F4C430;
+  --plate:#FFFFFF; --plate-ink:#151513; --plate-ink2:#575A5A; --sig:#151513;
   --up:#0B7A3B; --down:#C0261D; --up-m:#0A5F2F; --down-m:#8F1A12;
   --focus:#1F5FD1; --sel:rgba(244,196,48,.45);
   --fs-xs:12px; --fs-s:13px; --fs-b:15px; --fs-m:17px; --fs-l:22px; --fs-xl:44px;
@@ -84,11 +84,10 @@ main{ padding-bottom:calc(96px + env(safe-area-inset-bottom)); }
 .btn-s:active{ background:var(--tint); }
 
 /* Saran: satu-satunya pelat terbalik */
-.plate{ background:var(--plate); color:var(--plate-ink); margin-top:20px; padding:16px 16px 14px; border-radius:6px; }
+.plate{ background:var(--plate); color:var(--plate-ink); margin-top:20px; padding:16px 16px 14px; border-radius:6px; border:1px solid var(--rule); }
 .plate .top{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
 .sigw{ font-size:30px; line-height:1; font-weight:800; font-variation-settings:"wdth" 70; letter-spacing:.02em; color:var(--sig); }
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .sigw{ color:var(--sig); background:#F4C430; padding:4px 6px 2px; border-radius:3px; } }
-:root[data-theme="dark"] .sigw{ color:var(--sig); background:#F4C430; padding:4px 6px 2px; border-radius:3px; }
+.sigw{ color:#151513; background:#F4C430; padding:4px 6px 2px; border-radius:3px; }
 .plate .when{ font-size:var(--fs-xs); color:var(--plate-ink2); }
 .plate .t{ font-size:var(--fs-m); font-weight:700; margin-top:10px; }
 .plate .x{ margin-top:4px; color:var(--plate-ink); opacity:.92; }
@@ -99,8 +98,7 @@ main{ padding-bottom:calc(96px + env(safe-area-inset-bottom)); }
 .plate details[open] summary svg{ transform:rotate(180deg); }
 .plate ul{ margin:8px 0 0; padding:0 0 0 18px; display:grid; gap:6px; font-size:var(--fs-s); color:var(--plate-ink2); }
 .plate li::marker{ color:var(--sig); }
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .plate li::marker{ color:#8A6D10; } }
-:root[data-theme="dark"] .plate li::marker{ color:#8A6D10; }
+.plate li::marker{ color:#8A6D10; }
 
 /* Rel titik impas */
 .rail{ position:relative; height:44px; margin:6px 7px 4px; }
