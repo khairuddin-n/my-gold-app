@@ -1,5 +1,5 @@
 'use strict';
-const VERSION = '1.1.4';
+const VERSION = '1.1.5';
 const API = 'https://script.google.com/macros/s/AKfycbxNcZer2Morw-kTUR2dcMKzMpACanaEd67TE0cHp6AcnLXUJ78I0I-_FyyyRlDzl25-/exec';
 const LS = { key: 'mg_key', home: 'mg_home', range: 'mg_range' };
 
@@ -337,11 +337,15 @@ async function readFiles(list) {
       const payload = [{ mime: img.mime, data: img.data }];
       const t0 = performance.now();
       let r;
-      try { r = (await apiT(100000, 'extractPrices', payload))[0]; }
+      try { r = (await apiT(90000, 'extractPrices', payload))[0]; }
       catch (e) {
         if (/Kunci tidak valid/.test(e.message)) throw e;
-        try { r = (await apiT(100000, 'extractPrices', payload))[0]; }   // coba sekali lagi
-        catch (e2) { r = { ok: false, error: e2.message }; }
+        // ulang hanya kalau koneksi putus; kalau server lambat (timeout), mengulang cuma menggandakan waktu tunggu
+        if (/terlalu lama/.test(e.message)) r = { ok: false, error: e.message };
+        else {
+          try { r = (await apiT(90000, 'extractPrices', payload))[0]; }
+          catch (e2) { r = { ok: false, error: e2.message }; }
+        }
       }
       r.secs = (performance.now() - t0) / 1000;
       timings.push(r);
