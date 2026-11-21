@@ -1,6 +1,6 @@
 /* My Gold — halaman kurs harian: masthead kuning, tabel kutipan bergaris, satu pelat terbalik untuk saran. */
 :root{
-  --paper:#F7F7F4; --ink:#151513; --ink2:#5A5952; --ink3:#8A887F; --rule:#DFDED7; --tint:#EFEEE8;
+  --paper:#F5F6F6; --ink:#151513; --ink2:#575A5A; --ink3:#83888A; --rule:#DCDEDE; --tint:#ECEEEE; --flag:#A35A00;
   --mast:#F4C430; --mast-ink:#151513; --mast-ink2:#4B3C00; --mast-rule:rgba(21,21,19,.22);
   --plate:#151513; --plate-ink:#F7F7F4; --plate-ink2:#B9B7AE; --sig:#F4C430;
   --up:#0B7A3B; --down:#C0261D; --up-m:#0A5F2F; --down-m:#8F1A12;
@@ -15,7 +15,7 @@
     --mast:#231E0D; --mast-ink:#F4C430; --mast-ink2:#C9B57A; --mast-rule:rgba(244,196,48,.22);
     --plate:#EDECE6; --plate-ink:#121211; --plate-ink2:#56544D; --sig:#151513;
     --up:#4FC27E; --down:#F0776C; --up-m:#4FC27E; --down-m:#F0776C;
-    --focus:#7AA7FF; --sel:rgba(244,196,48,.35);
+    --focus:#7AA7FF; --flag:#F0B357; --sel:rgba(244,196,48,.35);
     color-scheme: dark;
   }
 }
@@ -92,7 +92,7 @@ main{ padding-bottom:calc(96px + env(safe-area-inset-bottom)); }
 @media (prefers-color-scheme: dark){ .plate li::marker{ color:#8A6D10; } }
 
 /* Rel titik impas */
-.rail{ position:relative; height:44px; margin:6px 0 4px; }
+.rail{ position:relative; height:44px; margin:6px 7px 4px; }
 .rail .track{ position:absolute; left:0; right:0; top:20px; height:4px; background:var(--tint); border-radius:2px; }
 .rail .fill{ position:absolute; left:0; top:20px; height:4px; background:var(--ink); border-radius:2px; }
 .rail .gap{ position:absolute; top:20px; height:4px; height:0; top:21px; border-top:2px dashed var(--down); }
@@ -143,7 +143,7 @@ main{ padding-bottom:calc(96px + env(safe-area-inset-bottom)); }
 .foot{ margin-top:32px; font-size:var(--fs-xs); color:var(--ink3); display:flex; justify-content:space-between; }
 
 /* Tombol aksi utama */
-.fab{ position:fixed; right:16px; bottom:calc(18px + env(safe-area-inset-bottom)); height:52px; padding:0 20px 0 16px; border-radius:26px; border:0; background:var(--ink); color:var(--paper); display:flex; align-items:center; gap:10px; font-size:var(--fs-b); font-weight:650; box-shadow:0 4px 14px rgba(0,0,0,.22), 0 1px 3px rgba(0,0,0,.2); z-index:5; }
+.fab{ position:fixed; right:max(16px, calc((100vw - 560px)/2 + 16px)); bottom:calc(18px + env(safe-area-inset-bottom)); height:52px; padding:0 20px 0 16px; border-radius:26px; border:0; background:var(--ink); color:var(--paper); display:flex; align-items:center; gap:10px; font-size:var(--fs-b); font-weight:650; box-shadow:0 4px 14px rgba(0,0,0,.22), 0 1px 3px rgba(0,0,0,.2); z-index:5; }
 .fab svg.i{ color:var(--mast); }
 @media (prefers-color-scheme: dark){ .fab svg.i{ color:#B48A10; } }
 .fab:active{ transform:scale(.97); }
@@ -176,10 +176,8 @@ main{ padding-bottom:calc(96px + env(safe-area-inset-bottom)); }
 .qt input::placeholder{ color:var(--ink3); }
 .qt td.in{ padding:4px 8px 4px 0; }
 .qt tr.miss .g, .qt tr.miss input::placeholder{ color:var(--down); }
-.qt tr.flag .g, .qt tr.flag .chg{ color:#A35A00; }
-@media (prefers-color-scheme: dark){ .qt tr.flag .g, .qt tr.flag .chg{ color:#F0B357; } }
-.warns{ margin-top:8px; font-size:var(--fs-s); color:#A35A00; display:grid; gap:2px; }
-@media (prefers-color-scheme: dark){ .warns{ color:#F0B357; } }
+.qt tr.flag .g, .qt tr.flag .chg{ color:var(--flag); }
+.warns{ margin-top:8px; font-size:var(--fs-s); color:var(--flag); display:grid; gap:2px; }
 .warns .bad{ color:var(--down); }
 .opt{ display:flex; align-items:center; gap:10px; margin-top:10px; font-size:var(--fs-b); }
 .opt input{ width:20px; height:20px; accent-color:var(--ink); }

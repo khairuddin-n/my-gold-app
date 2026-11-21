@@ -1,5 +1,5 @@
 'use strict';
-const VERSION = '1.0.0';
+const VERSION = '1.0.1';
 const API = 'https://script.google.com/macros/s/AKfycbxNcZer2Morw-kTUR2dcMKzMpACanaEd67TE0cHp6AcnLXUJ78I0I-_FyyyRlDzl25-/exec';
 const LS = { key: 'mg_key', home: 'mg_home', range: 'mg_range' };
 
@@ -147,7 +147,7 @@ function renderHome(h, cached) {
       ${xGoal > xNow ? `<div class="gap" style="left:${xNow.toFixed(1)}%;width:${(xGoal - xNow).toFixed(1)}%"></div>` : ''}
       <div class="tick goal" style="left:${xGoal.toFixed(1)}%"></div><div class="now" style="left:${xNow.toFixed(1)}%"></div>
     </div>
-    <div class="legend n"><div>Nilai sekarang<b>${rp(s.nilai)}</b></div><div class="r">Modal<b>${rp(s.modal)}</b></div></div>
+    <div class="legend n"><div>Sekarang<b>${pct(ratio)} dari modal</b></div><div class="r">Modal<b>${rp(s.modal)}</b></div></div>
     <div class="line n">Impas di buyback <b>${rp(s.impasPerGram)}/g</b>${s.buy1g ? ` · beli 1 g hari ini ${rp(s.buy1g)}, selisih ${pct(s.spread)}` : ''}</div>`;
 
   // Kepingan
@@ -180,7 +180,7 @@ function renderHome(h, cached) {
         <div class="track"></div><div class="band" style="left:${X(m.p25)}%;width:${(X(m.p75) - X(m.p25)).toFixed(1)}%"></div>
         <div class="med" style="left:${X(m.med)}%"></div><div class="now" style="left:${X(m.premium)}%"></div>
       </div>
-      <div class="legend n" style="font-size:var(--fs-xs)"><span>${pct(m.min)} terendah</span><span>biasanya ${pct(m.p25)}–${pct(m.p75)}</span><span class="r">${pct(m.max)} tertinggi</span></div>`;
+      <div class="legend n" style="font-size:var(--fs-xs)"><span>${m.premium <= m.min ? 'terendah 90 hari' : pct(m.min) + ' terendah'}</span><span>biasanya ${pct(m.p25)}–${pct(m.p75)}</span><span class="r">${m.premium >= m.max ? 'tertinggi 90 hari' : pct(m.max) + ' tertinggi'}</span></div>`;
   }
 
   // Papan harga buyback
@@ -230,7 +230,7 @@ function drawChart() {
   box.innerHTML = `<svg viewBox="0 0 ${W} ${Hh}" role="img" aria-label="Grafik harga buyback 1 gram">
     <line x1="0" x2="${W}" y1="${Hh - 0.5}" y2="${Hh - 0.5}" style="stroke:var(--rule)" stroke-width="1"/>
     ${showBE ? `<line x1="0" x2="${W}" y1="${beY}" y2="${beY}" style="stroke:var(--ink2)" stroke-width="1" stroke-dasharray="3 4"/>
-      <text x="${W}" y="${lblY}" text-anchor="end" font-size="11" font-weight="600" style="fill:var(--ink2);font-variation-settings:'wdth' 85">Impas ${fmt(be)}</text>` : ''}
+      <text x="${W}" y="${lblY}" text-anchor="end" font-size="11" font-weight="600" style="fill:var(--ink2);font-variation-settings:'wdth' 85">Impas</text>` : ''}
     <path d="${line}" fill="none" style="stroke:var(--ink)" stroke-width="1.75" stroke-linejoin="round" stroke-linecap="round"/>
     <line id="cl" y1="0" y2="${Hh}" style="stroke:var(--ink)" stroke-width="1" opacity="0"/>
     <circle id="cd" r="4.5" style="fill:var(--mast);stroke:var(--ink)" stroke-width="2"/>
