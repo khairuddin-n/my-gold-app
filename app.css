@@ -9,8 +9,9 @@
   --wd-c:78; /* lebar kondensasi angka */
   color-scheme: light;
 }
+/* Gelap: ikut HP kecuali dipaksa terang, atau dipaksa lewat tombol tema */
 @media (prefers-color-scheme: dark){
-  :root{
+  :root:not([data-theme="light"]){
     --paper:#121211; --ink:#EDECE6; --ink2:#A6A49B; --ink3:#8C8A81; --rule:#2A2926; --tint:#1C1B19;
     --mast:#231E0D; --mast-ink:#F4C430; --mast-ink2:#C9B57A; --mast-rule:rgba(244,196,48,.22);
     --plate:#EDECE6; --plate-ink:#121211; --plate-ink2:#56544D; --sig:#151513;
@@ -18,6 +19,14 @@
     --focus:#7AA7FF; --flag:#F0B357; --sel:rgba(244,196,48,.35);
     color-scheme: dark;
   }
+}
+:root[data-theme="dark"]{
+    --paper:#121211; --ink:#EDECE6; --ink2:#A6A49B; --ink3:#8C8A81; --rule:#2A2926; --tint:#1C1B19;
+    --mast:#231E0D; --mast-ink:#F4C430; --mast-ink2:#C9B57A; --mast-rule:rgba(244,196,48,.22);
+    --plate:#EDECE6; --plate-ink:#121211; --plate-ink2:#56544D; --sig:#151513;
+    --up:#4FC27E; --down:#F0776C; --up-m:#4FC27E; --down-m:#F0776C;
+    --focus:#7AA7FF; --flag:#F0B357; --sel:rgba(244,196,48,.35);
+    color-scheme: dark;
 }
 
 *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -78,7 +87,8 @@ main{ padding-bottom:calc(96px + env(safe-area-inset-bottom)); }
 .plate{ background:var(--plate); color:var(--plate-ink); margin-top:20px; padding:16px 16px 14px; border-radius:6px; }
 .plate .top{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
 .sigw{ font-size:30px; line-height:1; font-weight:800; font-variation-settings:"wdth" 70; letter-spacing:.02em; color:var(--sig); }
-@media (prefers-color-scheme: dark){ .sigw{ color:var(--sig); background:#F4C430; padding:4px 6px 2px; border-radius:3px; } }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .sigw{ color:var(--sig); background:#F4C430; padding:4px 6px 2px; border-radius:3px; } }
+:root[data-theme="dark"] .sigw{ color:var(--sig); background:#F4C430; padding:4px 6px 2px; border-radius:3px; }
 .plate .when{ font-size:var(--fs-xs); color:var(--plate-ink2); }
 .plate .t{ font-size:var(--fs-m); font-weight:700; margin-top:10px; }
 .plate .x{ margin-top:4px; color:var(--plate-ink); opacity:.92; }
@@ -89,7 +99,8 @@ main{ padding-bottom:calc(96px + env(safe-area-inset-bottom)); }
 .plate details[open] summary svg{ transform:rotate(180deg); }
 .plate ul{ margin:8px 0 0; padding:0 0 0 18px; display:grid; gap:6px; font-size:var(--fs-s); color:var(--plate-ink2); }
 .plate li::marker{ color:var(--sig); }
-@media (prefers-color-scheme: dark){ .plate li::marker{ color:#8A6D10; } }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .plate li::marker{ color:#8A6D10; } }
+:root[data-theme="dark"] .plate li::marker{ color:#8A6D10; }
 
 /* Rel titik impas */
 .rail{ position:relative; height:44px; margin:6px 7px 4px; }
@@ -145,7 +156,8 @@ main{ padding-bottom:calc(96px + env(safe-area-inset-bottom)); }
 /* Tombol aksi utama */
 .fab{ position:fixed; right:max(16px, calc((100vw - 560px)/2 + 16px)); bottom:calc(18px + env(safe-area-inset-bottom)); height:52px; padding:0 20px 0 16px; border-radius:26px; border:0; background:var(--ink); color:var(--paper); display:flex; align-items:center; gap:10px; font-size:var(--fs-b); font-weight:650; box-shadow:0 4px 14px rgba(0,0,0,.22), 0 1px 3px rgba(0,0,0,.2); z-index:5; }
 .fab svg.i{ color:var(--mast); }
-@media (prefers-color-scheme: dark){ .fab svg.i{ color:#B48A10; } }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .fab svg.i{ color:#B48A10; } }
+:root[data-theme="dark"] .fab svg.i{ color:#B48A10; }
 .fab:active{ transform:scale(.97); }
 
 /* ---------- Perbarui harga ---------- */
@@ -202,3 +214,4 @@ main{ padding-bottom:calc(96px + env(safe-area-inset-bottom)); }
 .snack.show{ opacity:1; transform:none; }
 
 @media (prefers-reduced-motion: reduce){ *{ animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+.mast .bar #theme{ margin-right:-4px; }

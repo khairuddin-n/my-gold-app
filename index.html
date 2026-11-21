@@ -8,13 +8,18 @@
 <meta name="theme-color" content="#F4C430" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#231E0D" media="(prefers-color-scheme: dark)">
 <meta name="robots" content="noindex">
+<script>
+// Terapkan pilihan tema sebelum CSS dimuat (tanpa kedipan)
+try { var t = localStorage.getItem('mg_theme'); if (t === 'light' || t === 'dark') { document.documentElement.dataset.theme = t;
+  document.querySelectorAll('meta[name=theme-color]').forEach(function (m) { m.setAttribute('content', t === 'dark' ? '#231E0D' : '#F4C430'); }); } } catch (e) {}
+</script>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap">
-<link rel="stylesheet" href="app.css?v=1.0.2">
+<link rel="stylesheet" href="app.css?v=1.1.0">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -22,6 +27,9 @@
   <symbol id="i-up" viewBox="0 0 9 8"><path d="M4.5 0 9 8H0z"/></symbol>
   <symbol id="i-down" viewBox="0 0 9 8"><path d="M0 0h9L4.5 8z"/></symbol>
   <symbol id="i-flat" viewBox="0 0 9 8"><path d="M0 3h9v2H0z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-auto" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17a8.5 8.5 0 0 0 0-17z" style="fill:currentColor"/></symbol>
   <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></symbol>
   <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m11 6-6 6 6 6"/></symbol>
   <symbol id="i-cam" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
@@ -51,6 +59,7 @@
         <svg class="mark" aria-hidden="true"><use href="#i-mark"/></svg>
         <span class="name">My Gold</span>
         <span class="stamp n" id="stamp"></span>
+        <button class="ib" id="theme" aria-label="Tema ikut HP"><svg class="i"><use href="#i-auto"/></svg></button>
         <button class="ib" id="reload" aria-label="Muat ulang"><svg class="i"><use href="#i-refresh"/></svg></button>
       </div>
       <div class="lbl" id="lbl">Nilai emas</div>
@@ -124,6 +133,6 @@
   </div></div>
 </div>
 
-<script src="app.js?v=1.0.2"></script>
+<script src="app.js?v=1.1.0"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 'use strict';
-const VERSION = '1.0.2';
+const VERSION = '1.1.0';
 const API = 'https://script.google.com/macros/s/AKfycbxNcZer2Morw-kTUR2dcMKzMpACanaEd67TE0cHp6AcnLXUJ78I0I-_FyyyRlDzl25-/exec';
 const LS = { key: 'mg_key', home: 'mg_home', range: 'mg_range' };
 
@@ -96,6 +96,26 @@ async function load(manual) {
   loading = false; $('reload').classList.remove('busy');
 }
 $('reload').onclick = () => load(true);
+
+// ---------- Tema: ikut HP → terang → gelap ----------
+const THEMES = { system: ['i-auto', 'Tema ikut HP'], light: ['i-sun', 'Tema terang'], dark: ['i-moon', 'Tema gelap'] };
+const getTheme = () => { const t = store.get('mg_theme'); return THEMES[t] ? t : 'system'; };
+function applyTheme(t) {
+  if (t === 'system') { delete document.documentElement.dataset.theme; store.del('mg_theme'); }
+  else { document.documentElement.dataset.theme = t; store.set('mg_theme', t); }
+  const metas = document.querySelectorAll('meta[name=theme-color]');
+  metas.forEach(m => m.setAttribute('content', t === 'system' ? (/dark/.test(m.media) ? '#231E0D' : '#F4C430') : t === 'dark' ? '#231E0D' : '#F4C430'));
+  const [ic, label] = THEMES[t];
+  $('theme').setAttribute('aria-label', label);
+  $('theme').querySelector('use').setAttribute('href', '#' + ic);
+  if (typeof drawChart === 'function' && view === 'home') drawChart();
+}
+$('theme').onclick = () => {
+  const order = ['system', 'light', 'dark'];
+  const t = order[(order.indexOf(getTheme()) + 1) % 3];
+  applyTheme(t); snack(THEMES[t][1]);
+};
+applyTheme(getTheme());
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible' && view === 'home' && Date.now() - loadedAt > 10 * 60e3) load(false);
 });
