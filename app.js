@@ -1,5 +1,5 @@
 'use strict';
-const VERSION = '1.1.1';
+const VERSION = '1.1.2';
 const API = 'https://script.google.com/macros/s/AKfycbxNcZer2Morw-kTUR2dcMKzMpACanaEd67TE0cHp6AcnLXUJ78I0I-_FyyyRlDzl25-/exec';
 const LS = { key: 'mg_key', home: 'mg_home', range: 'mg_range' };
 
@@ -324,16 +324,18 @@ function shrink(file) {
 }
 
 async function readFiles(list) {
-  const fails = [], results = [];
+  const fails = [], results = [], timings = [];
   try {
     // satu gambar per permintaan (maks 3 sekaligus): satu gagal tidak menggagalkan yang lain
     let done = 0, next = 0;
+    $('trace').textContent = '';
     const tick = () => { $('prog').innerHTML = `<span class="spin"></span>Membaca ${done} dari ${list.length} gambar…`; };
     tick();
     const one = async file => {
       let img;
       try { img = await shrink(file); } catch (e) { fails.push({ name: file.name, error: e.message }); return; }
       const payload = [{ mime: img.mime, data: img.data }];
+      const t0 = performance.now();
       let r;
       try { r = (await apiT(100000, 'extractPrices', payload))[0]; }
       catch (e) {
@@ -341,6 +343,8 @@ async function readFiles(list) {
         try { r = (await apiT(100000, 'extractPrices', payload))[0]; }   // coba sekali lagi
         catch (e2) { r = { ok: false, error: e2.message }; }
       }
+      r.secs = (performance.now() - t0) / 1000;
+      timings.push(r);
       r.ok ? results.push(r) : fails.push({ name: file.name, error: r.error });
     };
     const worker = async () => { while (next < list.length) { await one(list[next++]); done++; tick(); } };
@@ -349,6 +353,9 @@ async function readFiles(list) {
     const nOcr = results.filter(r => r.via === 'ocr').length;
     $('prog').innerHTML = !results.length ? '' :
       `<svg class="i ok" aria-hidden="true"><use href="#i-check"/></svg>${results.length} gambar terbaca` + (nOcr ? ` · ${nOcr} lewat OCR, cek angkanya` : '');
+    // waktu baca (untuk melacak bagian yang lambat): total di HP, lalu rincian server
+    const slow = timings.slice().sort((a, b) => b.secs - a.secs)[0];
+    $('trace').textContent = slow ? `${slow.secs.toFixed(1).replace('.', ',')} dtk` + (slow.server ? ` · server ${slow.server}: ${slow.trace || '-'}` : '') : '';
   } catch (e) {
     snack('Gagal membaca: ' + e.message);
     $('prog').textContent = '';
