@@ -1,5 +1,5 @@
 'use strict';
-const VERSION = '1.1.2';
+const VERSION = '1.1.3';
 const API = 'https://script.google.com/macros/s/AKfycbxNcZer2Morw-kTUR2dcMKzMpACanaEd67TE0cHp6AcnLXUJ78I0I-_FyyyRlDzl25-/exec';
 const LS = { key: 'mg_key', home: 'mg_home', range: 'mg_range' };
 
@@ -417,7 +417,7 @@ function check(c) {
 }
 
 function renderCards() {
-  $('cards').innerHTML = !cards.length
+    ? ''
     ? `<p class="empty">Bagikan screenshot dari aplikasi GMI ke <b>My Gold</b>, pilih lewat <b>Tambah</b>, atau ketik sendiri dengan <b>Isi manual</b>.</p>`
     : cards.map(c => {
       const { w, flag, ref } = check(c), ex = exists(c.date);
